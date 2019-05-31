@@ -26,11 +26,11 @@ public class BookSearchService {
         QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Book.class).get();
 
         Query query = queryBuilder.keyword()
-                .onFields("title", "description")
+                .onFields("title", "subtitle", "description")
                 .matching(term)
                 .createQuery();
 
-        FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query);
+        FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Book.class);
 
         return jpaQuery.getResultList();
     }

@@ -23,6 +23,12 @@ public class Book extends Audit{
     private String title;
 
     @NotNull
+    @Size(max = 100)
+    @Column(unique = true)
+    @Field
+    private String subtitle;
+
+    @NotNull
     @Size(max = 250)
     @Field
     private String description;
@@ -39,13 +45,15 @@ public class Book extends Audit{
 
     public Book() {}
 
-    public Book(@NotNull @Size(max = 100) String title, @NotNull @Size(max = 250) String description) {
+    public Book(@NotNull @Size(max = 100) String title,  @NotNull @Size(max = 100) String subtitle, @NotNull @Size(max = 250) String description) {
         this.title = title;
+        this.subtitle = subtitle;
         this.description = description;
     }
 
-    public Book(@NotNull @Size(max = 100) String title, @NotNull @Size(max = 250) String description, Author author, Category category) {
+    public Book(@NotNull @Size(max = 100) String title, @NotNull @Size(max = 100) String subtitle, @NotNull @Size(max = 250) String description, Author author, Category category) {
         this.title = title;
+        this.subtitle = subtitle;
         this.description = description;
         this.author = author;
         this.category = category;
@@ -65,6 +73,14 @@ public class Book extends Audit{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     public String getDescription() {
