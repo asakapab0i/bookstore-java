@@ -6,7 +6,6 @@ import com.bryan.bookstore.entity.Category;
 import com.bryan.bookstore.exception.ResourceNotFoundException;
 import com.bryan.bookstore.repository.AuthorRepository;
 import com.bryan.bookstore.repository.BookRepository;
-import com.bryan.bookstore.repository.BookSearchService;
 import com.bryan.bookstore.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +23,6 @@ public class BookService {
 
     @Autowired
     private CategoryRepository categoryRepository;
-
-    @Autowired
-    private BookSearchService bookSearch;
 
     public List<Book> getBooks(){
         return bookRepository.findAll();
@@ -89,6 +85,32 @@ public class BookService {
         author1.setBooks(books);
         category1.setBooks(books);
         return book1;
+    }
+
+    public Book updateBook(Book book, Integer book_id){
+        Optional<Book> bookById = bookRepository.findById(book_id);
+        if (!bookById.isPresent()){
+            throw new ResourceNotFoundException("Book with id " + book_id + " does not exist.");
+        }
+
+        Book bookSave = bookById.get();
+
+        bookSave.setTitle(book.getTitle());
+        bookSave.setSubtitle(book.getSubtitle());
+        bookSave.setDescription(book.getDescription());
+
+        bookSave.setAuthor(bookSave.getAuthor());
+
+        bookSave.setCategory(bookSave.getCategory());
+
+        bookRepository.save(bookSave);
+
+        Optional<Book> bookById2 = bookRepository.findById(book_id);
+        if (!bookById2.isPresent()){
+            throw new ResourceNotFoundException("Book with id " + book_id + " does not exist.");
+        }
+
+        return bookById2.get();
     }
 
 }

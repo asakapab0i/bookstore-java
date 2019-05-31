@@ -56,4 +56,9 @@ public class BookController {
     public Optional<Book> getBookById(@PathVariable Integer book_id){
         return bookService.getBookById(book_id);
     }
+
+    @PutMapping(value = "/book/{book_id}")
+    public Book updateBook(@RequestBody Book book, @PathVariable Integer book_id){
+        return bookService.updateBook(book, book_id);
+    }
 }

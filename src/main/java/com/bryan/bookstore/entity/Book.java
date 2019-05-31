@@ -99,28 +99,20 @@ public class Book extends Audit{
         this.author = author;
     }
 
-    public Integer getAuthor_id(){
-        return author.getId();
-    }
-
-    public  String getAuthor_fullname(){
-        return author.getFirst_name() + " " +author.getLast_name();
-    }
-
-    public Integer getCategory_id(){
-        return category.getId();
-    }
-
-    public String getCategory_category() {
-        return category.getCategory();
-    }
-
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Integer getAuthor_id(){
+        return author.getId();
+    }
+
+    public Integer getCategory_id(){
+        return category.getId();
     }
 
     @Override
