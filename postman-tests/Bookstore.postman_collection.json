@@ -1,0 +1,988 @@
+{
+	"info": {
+		"_postman_id": "dfbceb6a-079d-4191-903e-b867560c3976",
+		"name": "Bookstore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AuthorController",
+			"item": [
+				{
+					"name": "Add Author 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5c15173d-e61b-49c1-847a-8422602c043d",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the first name is Bryan\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.first_name).to.eql(\"Bryan\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\":\"Bryan\",\n\t\"last_name\": \"Bojorque\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/author/author",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Author 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86643805-4b9e-422b-83c7-4dcdeae02912",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the first name is Test\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.first_name).to.eql(\"Test\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\":\"Test\",\n\t\"last_name\": \"Bojorque 1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/author/author",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Author 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86643805-4b9e-422b-83c7-4dcdeae02912",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the first name is Bryan is updated to Test 2\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.first_name).to.eql(\"Test 2\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"test if the last name is Bojorque is updated to Bojorque 1\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.last_name).to.eql(\"Bojorque 1\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\":\"Test 2\",\n\t\"last_name\": \"Bojorque 1\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/author/author/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"author",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Author 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86643805-4b9e-422b-83c7-4dcdeae02912",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the first name is Test is updated to Bryan\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.first_name).to.eql(\"Bryan\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the last name is Bojorque 1 is updated to Bojorque\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.last_name).to.eql(\"Bojorque\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\":\"Bryan\",\n\t\"last_name\": \"Bojorque\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/author/author/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"author",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Authors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9afc31b8-87a3-4a77-84e2-8c72a0970c91",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/author/getAllAuthors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"getAllAuthors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CategoryController",
+			"item": [
+				{
+					"name": "Add Category 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b1ae4b1e-f26e-4f20-b446-1947b202bb94",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"category\":\"Horror\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/category/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86643805-4b9e-422b-83c7-4dcdeae02912",
+								"exec": [
+									"pm.test(\"response is ok\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"test if the category Horror is updated to Horror Drama\", function(){",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.category).to.eql(\"Horror Drama\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"category\": \"Horror Drama\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/category/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29ee1bbf-082e-4f98-9be6-0d39c12a2dde",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"category\":\"Comedy\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/category/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86643805-4b9e-422b-83c7-4dcdeae02912",
+								"exec": [
+									"pm.test(\"response is ok\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"test if the category Comedy is updated to Drama\", function(){",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.category).to.eql(\"Drama\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"category\":\"Drama\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/category/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d5271e2d-b0bc-401d-8434-0518e3716275",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/category/getAllCategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category",
+								"getAllCategories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BookController",
+			"item": [
+				{
+					"name": "Add Book 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "66f11505-88e2-494b-a1cd-7516d21b9345",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Jumanji\",\n\t\"description\":\"Nice movie!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/book/1/book/1/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"1",
+								"book",
+								"1",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "37f1fbb7-3ca8-4291-9b81-dbb6f782aad1",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Jumanji 2\",\n\t\"description\":\"Nice movie!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/book/2/book/2/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"2",
+								"book",
+								"2",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "66f11505-88e2-494b-a1cd-7516d21b9345",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Jumanji 3\",\n\t\"description\":\"Nice movie!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/book/1/book/2/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"1",
+								"book",
+								"2",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a2808918-9cc7-4efb-9e59-f21663d76d93",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have author_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"author_id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have category_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"category_id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/book/book/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"book",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb11f41d-1a4b-4bc9-9a00-2ead7b9e2eaf",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have author_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"author_id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have category_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"category_id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/book/book/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"book",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78d69387-1f5e-4d5d-b1da-10f8160d84ce",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have author_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"author_id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have category_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"category_id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/book/getAllBooks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"getAllBooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books By Category 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78d69387-1f5e-4d5d-b1da-10f8160d84ce",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have author_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"author_id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have category_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"category_id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/book/getAllBooks/1/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"getAllBooks",
+								"1",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books By Category 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78d69387-1f5e-4d5d-b1da-10f8160d84ce",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have author_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"author_id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have category_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"category_id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/book/getAllBooks/2/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"getAllBooks",
+								"2",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books By Author 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78d69387-1f5e-4d5d-b1da-10f8160d84ce",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have author_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"author_id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have category_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"category_id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/book/getAllBooks/1/author",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"getAllBooks",
+								"1",
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books By Author 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78d69387-1f5e-4d5d-b1da-10f8160d84ce",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have author_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"author_id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have category_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"category_id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/book/getAllBooks/2/author",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"getAllBooks",
+								"2",
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Books By String 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78d69387-1f5e-4d5d-b1da-10f8160d84ce",
+								"exec": [
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have author_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"author_id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"test if the Book JSON have category_id Property\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"category_id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/book/searchBooks/jumanji",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"searchBooks",
+								"jumanji"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
