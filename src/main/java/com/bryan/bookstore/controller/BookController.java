@@ -33,8 +33,8 @@ public class BookController {
     }
 
     @GetMapping("/getAllBooks/{author_id}/author")
-    public List<Book> getBooksByAuthor(){
-        return bookService.getBooksByCategory();
+    public List<Book> getBooksByAuthor(@PathVariable Integer author_id){
+        return bookService.getBooksByAuthor(author_id);
     }
 
     @PostMapping(value = "/{author_id}/book/{category_id}/category", consumes = MediaType.APPLICATION_JSON_VALUE)

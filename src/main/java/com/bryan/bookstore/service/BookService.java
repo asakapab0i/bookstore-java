@@ -48,6 +48,19 @@ public class BookService {
         return bookList;
     }
 
+    public List<Book> getBooksByAuthor(Integer author_id){
+        Set<Book> books = new HashSet<>();
+
+        Optional<Author> authorById = authorRepository.findById(author_id);
+        if(!authorById.isPresent()){
+            throw new ResourceNotFoundException("Author with id " + author_id + " does not exist.");
+        }
+
+        books = authorById.get().getBooks();
+        List bookList = new ArrayList(books);
+        return bookList;
+    }
+
     public Book createBook(Book book, Integer author_id, Integer category_id){
         Set<Book> books = new HashSet<>();
         Author author1 = new Author();
