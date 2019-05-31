@@ -16,13 +16,13 @@ import java.util.*;
 public class BookService {
 
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     @Autowired
-    AuthorRepository authorRepository;
+    private AuthorRepository authorRepository;
 
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     public List<Book> getBooks(){
         return bookRepository.findAll();
@@ -36,7 +36,7 @@ public class BookService {
     }
 
     public List<Book> getBooksByCategory(Integer category_id){
-        Set<Book> books = new HashSet<>();
+        Set<Book> books;
 
         Optional<Category> categoryById = categoryRepository.findById(category_id);
         if(!categoryById.isPresent()){
@@ -44,12 +44,11 @@ public class BookService {
         }
 
         books = categoryById.get().getBooks();
-        List bookList = new ArrayList(books);
-        return bookList;
+        return new ArrayList<>(books);
     }
 
     public List<Book> getBooksByAuthor(Integer author_id){
-        Set<Book> books = new HashSet<>();
+        Set<Book> books;
 
         Optional<Author> authorById = authorRepository.findById(author_id);
         if(!authorById.isPresent()){
@@ -57,8 +56,7 @@ public class BookService {
         }
 
         books = authorById.get().getBooks();
-        List bookList = new ArrayList(books);
-        return bookList;
+        return new ArrayList<>(books);
     }
 
     public Book createBook(Book book, Integer author_id, Integer category_id){
