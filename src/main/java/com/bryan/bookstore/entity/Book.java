@@ -1,12 +1,15 @@
 package com.bryan.bookstore.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Indexed
 public class Book extends Audit{
 
     @Id
@@ -16,10 +19,12 @@ public class Book extends Audit{
     @NotNull
     @Size(max = 100)
     @Column(unique = true)
+    @Field
     private String title;
 
     @NotNull
     @Size(max = 250)
+    @Field
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -82,8 +87,16 @@ public class Book extends Audit{
         return author.getId();
     }
 
+    public  String getAuthor_fullname(){
+        return author.getFirst_name() + " " +author.getLast_name();
+    }
+
     public Integer getCategory_id(){
         return category.getId();
+    }
+
+    public String getCategory_category() {
+        return category.getCategory();
     }
 
     public Category getCategory() {

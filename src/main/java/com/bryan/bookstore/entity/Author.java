@@ -1,6 +1,8 @@
 package com.bryan.bookstore.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -8,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Indexed
 public class Author extends Audit{
 
     @Id
@@ -19,9 +22,11 @@ public class Author extends Audit{
     private Set<Book> books = new HashSet<>();
 
     @NotBlank(message = "Enter first name")
+    @Field
     private String first_name;
 
     @NotBlank(message = "Enter last name")
+    @Field
     private String last_name;
 
     public Author() {

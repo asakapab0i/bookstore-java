@@ -74,3 +74,4 @@ fabric.properties
 .idea/misc.xml
 bookstore.iml
 target/*
+indexes/*

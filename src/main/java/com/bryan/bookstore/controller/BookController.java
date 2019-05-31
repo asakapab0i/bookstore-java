@@ -1,14 +1,12 @@
 package com.bryan.bookstore.controller;
 
-import com.bryan.bookstore.entity.Category;
+import com.bryan.bookstore.entity.Book;
+import com.bryan.bookstore.repository.BookSearchService;
 import com.bryan.bookstore.service.AuthorService;
 import com.bryan.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import com.bryan.bookstore.entity.Book;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,12 +17,21 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
     @Autowired
     private AuthorService authorService;
+
+    @Autowired
+    private BookSearchService bookSearchService;
 
     @GetMapping("/getAllBooks")
     public List<Book> getBooks(){
         return bookService.getBooks();
+    }
+
+    @GetMapping("/searchBooks/{term}")
+    public List searchBooks(@PathVariable String term){
+        return bookSearchService.getBooksByString(term);
     }
 
     @GetMapping("/getAllBooks/{category_id}/category")

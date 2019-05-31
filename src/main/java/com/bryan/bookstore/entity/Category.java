@@ -1,6 +1,8 @@
 package com.bryan.bookstore.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -8,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Indexed
 public class Category extends Audit{
 
     @Id
@@ -20,6 +23,7 @@ public class Category extends Audit{
 
     @Column(unique = true)
     @NotBlank(message = "Enter a category")
+    @Field
     private String category;
 
     public Category() {

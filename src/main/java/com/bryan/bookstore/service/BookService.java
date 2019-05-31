@@ -6,6 +6,7 @@ import com.bryan.bookstore.entity.Category;
 import com.bryan.bookstore.exception.ResourceNotFoundException;
 import com.bryan.bookstore.repository.AuthorRepository;
 import com.bryan.bookstore.repository.BookRepository;
+import com.bryan.bookstore.repository.BookSearchService;
 import com.bryan.bookstore.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class BookService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private BookSearchService bookSearch;
 
     public List<Book> getBooks(){
         return bookRepository.findAll();
