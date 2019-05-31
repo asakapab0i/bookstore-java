@@ -1,7 +1,6 @@
 package com.bryan.bookstore.controller;
 
 import com.bryan.bookstore.entity.Book;
-import com.bryan.bookstore.repository.BookSearchService;
 import com.bryan.bookstore.service.AuthorService;
 import com.bryan.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,6 @@ public class BookController {
     @Autowired
     private AuthorService authorService;
 
-    @Autowired
-    private BookSearchService bookSearchService;
-
     @GetMapping("/getAllBooks")
     public List<Book> getBooks(){
         return bookService.getBooks();
@@ -31,7 +27,7 @@ public class BookController {
 
     @GetMapping("/searchBooks/{term}")
     public List searchBooks(@PathVariable String term){
-        return bookSearchService.getBooksByString(term);
+        return bookService.searchBook(term);
     }
 
     @GetMapping("/getAllBooks/{category_id}/category")
