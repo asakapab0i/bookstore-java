@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="category")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class CategoryController {
         return categoryService.createCategory(category);
     }
 
-    @PutMapping("/category/{category_id}")
+    @PutMapping(value = "/category/{category_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Category updateAuthor(@RequestBody Category category, @PathVariable Integer category_id){
         return categoryService.updateCategory(category, category_id);
     }
