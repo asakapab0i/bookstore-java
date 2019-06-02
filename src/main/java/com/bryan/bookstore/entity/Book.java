@@ -1,6 +1,5 @@
 package com.bryan.bookstore.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 
@@ -33,14 +32,12 @@ public class Book extends Audit{
     @Field
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
-    @JsonIgnore
     private Author author;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
-    @JsonIgnore
     private Category category;
 
     public Book() {}
@@ -59,8 +56,8 @@ public class Book extends Audit{
         this.category = category;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getId(){
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -105,14 +102,6 @@ public class Book extends Audit{
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public Integer getAuthor_id(){
-        return author.getId();
-    }
-
-    public Integer getCategory_id(){
-        return category.getId();
     }
 
     @Override

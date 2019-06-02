@@ -67,7 +67,6 @@ public class Author extends Audit{
     @Override
     public String toString() {
         return "Author{" +
-                "id=" + id +
                 ", books=" + books +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +

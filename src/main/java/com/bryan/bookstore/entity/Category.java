@@ -56,7 +56,6 @@ public class Category extends Audit{
     @Override
     public String toString() {
         return "Category{" +
-                "id=" + id +
                 ", books=" + books +
                 ", category='" + category + '\'' +
                 '}';
