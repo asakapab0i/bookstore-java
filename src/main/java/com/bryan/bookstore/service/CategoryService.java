@@ -45,4 +45,13 @@ public class CategoryService {
         categorySave.setCategory(category.getCategory());
         return categoryRepository.save(categorySave);
     }
+
+    public Optional<Category> getCategory(Integer category_id){
+        Optional<Category> categoryById = categoryRepository.findById(category_id);
+        if (!categoryById.isPresent()){
+            throw new ResourceNotFoundException("Category with id " + category_id + " does not exist.");
+        }
+
+        return categoryRepository.findById(category_id);
+    }
 }

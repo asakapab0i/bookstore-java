@@ -36,10 +36,6 @@ public class Author extends Audit{
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Set<Book> getBooks() {
         return books;
     }

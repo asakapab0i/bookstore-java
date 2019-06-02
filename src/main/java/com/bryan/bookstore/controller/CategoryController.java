@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path="category")
@@ -30,6 +31,11 @@ public class CategoryController {
     @PostMapping(value = "/category", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Category createCategory(@RequestBody Category category){
         return categoryService.createCategory(category);
+    }
+
+    @GetMapping("/category/{category_id}")
+    public Optional<Category> categoryById(@PathVariable Integer category_id){
+        return categoryService.getCategory(category_id);
     }
 
     @PutMapping(value = "/category/{category_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
