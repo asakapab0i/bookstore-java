@@ -1,5 +1,6 @@
 package com.bryan.bookstore.controller;
 
+import com.bryan.bookstore.entity.Author;
 import com.bryan.bookstore.entity.Category;
 import com.bryan.bookstore.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public class CategoryController {
     @GetMapping("/getAllCategories")
     public List<Category> getCategories(){
         return categoryService.getCategories();
+    }
+
+    @GetMapping("/search/{term}")
+    public List<Author> searchCategories(@PathVariable String term){
+        return categoryService.searchCategories(term);
     }
 
     @PostMapping(value = "/category", consumes = MediaType.APPLICATION_JSON_VALUE)

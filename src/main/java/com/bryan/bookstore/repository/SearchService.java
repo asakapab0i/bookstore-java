@@ -2,6 +2,7 @@ package com.bryan.bookstore.repository;
 
 import com.bryan.bookstore.entity.Author;
 import com.bryan.bookstore.entity.Book;
+import com.bryan.bookstore.entity.Category;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
@@ -65,6 +66,30 @@ public class SearchService {
                 .createQuery();
 
         FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Author.class);
+
+        return jpaQuery.getResultList();
+    }
+
+    public List getCategoriesByString(String term){
+        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+
+        QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Category.class).get();
+
+//        Query query = queryBuilder.keyword()
+//                .onFields("title", "subtitle", "description")
+//                .matching(term)
+//                .createQuery();
+
+        Query query = queryBuilder
+                .keyword()
+                .fuzzy()
+                .withEditDistanceUpTo(2)
+                .withPrefixLength(0)
+                .onFields("category")
+                .matching(term)
+                .createQuery();
+
+        FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Category.class);
 
         return jpaQuery.getResultList();
     }
