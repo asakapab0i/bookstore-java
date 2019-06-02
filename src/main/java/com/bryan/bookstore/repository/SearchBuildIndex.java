@@ -13,7 +13,7 @@ import static org.hibernate.search.jpa.Search.getFullTextEntityManager;
 
 @Component
 @Transactional
-public class BuildSearchIndex
+public class SearchBuildIndex
         implements ApplicationListener<ApplicationReadyEvent> {
 
     @PersistenceContext

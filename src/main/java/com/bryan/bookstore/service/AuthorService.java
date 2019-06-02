@@ -3,6 +3,7 @@ package com.bryan.bookstore.service;
 import com.bryan.bookstore.entity.Author;
 import com.bryan.bookstore.exception.ResourceNotFoundException;
 import com.bryan.bookstore.repository.AuthorRepository;
+import com.bryan.bookstore.repository.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,10 @@ import java.util.Optional;
 public class AuthorService {
 
     @Autowired
-    AuthorRepository authorRepository;
+    private AuthorRepository authorRepository;
+
+    @Autowired
+    private SearchService searchService;
 
     public List<Author> getAuthors(){
         return authorRepository.findAll();
@@ -34,5 +38,12 @@ public class AuthorService {
         authorSave.setFirst_name(author.getFirst_name());
         authorSave.setLast_name(author.getLast_name());
         return authorRepository.save(authorSave);
+    }
+
+    public List searchAuthor(String term){
+        if (term.isEmpty()){
+            throw new ResourceNotFoundException("The search term is blank.");
+        }
+        return searchService.getAuthorsByString(term);
     }
 }

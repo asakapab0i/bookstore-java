@@ -6,7 +6,7 @@ import com.bryan.bookstore.entity.Category;
 import com.bryan.bookstore.exception.ResourceNotFoundException;
 import com.bryan.bookstore.repository.AuthorRepository;
 import com.bryan.bookstore.repository.BookRepository;
-import com.bryan.bookstore.repository.BookSearchService;
+import com.bryan.bookstore.repository.SearchService;
 import com.bryan.bookstore.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class BookService {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    private BookSearchService bookSearchService;
+    private SearchService searchService;
 
     public List<Book> getBooks(){
         return bookRepository.findAll();
@@ -121,7 +121,7 @@ public class BookService {
         if (term.isEmpty()){
             throw new ResourceNotFoundException("The search term is blank.");
         }
-        return bookSearchService.getBooksByString(term);
+        return searchService.getBooksByString(term);
     }
 
 }

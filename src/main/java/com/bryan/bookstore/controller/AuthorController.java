@@ -25,6 +25,11 @@ public class AuthorController {
         return authorService.getAuthors();
     }
 
+    @GetMapping("/search/{term}")
+    public List<Author> searchAuthors(@PathVariable String term){
+        return authorService.searchAuthor(term);
+    }
+
     @PostMapping(value = "/author", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Author createAuthor(@RequestBody Author author){
         return authorService.createAuthor(author);
