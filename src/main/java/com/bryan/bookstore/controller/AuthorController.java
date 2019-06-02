@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path="author")
@@ -38,5 +39,10 @@ public class AuthorController {
     @PutMapping("/author/{author_id}")
     public Author updateAuthor(@RequestBody Author author, @PathVariable Integer author_id){
         return authorService.updateAuthor(author, author_id);
+    }
+
+    @GetMapping("/author/{author_id}")
+    public Optional<Author> getAuthor(@PathVariable Integer author_id){
+        return authorService.getAuthorById(author_id);
     }
 }

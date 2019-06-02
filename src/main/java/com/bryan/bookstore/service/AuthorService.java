@@ -46,4 +46,12 @@ public class AuthorService {
         }
         return searchService.getAuthorsByString(term);
     }
+
+    public Optional<Author> getAuthorById(Integer author_id){
+        Optional<Author> authorById = authorRepository.findById(author_id);
+        if (!authorById.isPresent()){
+            throw new ResourceNotFoundException("Author with id " + author_id + " does not exist.");
+        }
+        return authorRepository.findById(author_id);
+    }
 }
