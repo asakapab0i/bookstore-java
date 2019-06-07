@@ -41,8 +41,8 @@ public class BookService {
             throw new ResourceNotFoundException("Book with id " + id + " not found");
         }
 
-        return bookAuthorsRepository.findByBook_id(id);
-        //return bookRepository.findById(id);
+        //return bookAuthorsRepository.findByBook_id(id);
+        return bookRepository.findById(id);
     }
 
     public List<Book> getBooksByCategory(Integer category_id){
