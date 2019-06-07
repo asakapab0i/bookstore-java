@@ -2,22 +2,26 @@ package com.bryan.bookstore.service;
 
 import com.bryan.bookstore.entity.Author;
 import com.bryan.bookstore.entity.Book;
+import com.bryan.bookstore.entity.BookAuthors;
 import com.bryan.bookstore.entity.Category;
 import com.bryan.bookstore.exception.ResourceNotFoundException;
-import com.bryan.bookstore.repository.AuthorRepository;
-import com.bryan.bookstore.repository.BookRepository;
-import com.bryan.bookstore.repository.SearchService;
-import com.bryan.bookstore.repository.CategoryRepository;
+import com.bryan.bookstore.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class BookService {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private BookAuthorsRepository bookAuthorsRepository;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -36,7 +40,9 @@ public class BookService {
         if (!bookRepository.existsById(id)){
             throw new ResourceNotFoundException("Book with id " + id + " not found");
         }
-        return bookRepository.findById(id);
+
+        return bookAuthorsRepository.findByBook_id(id);
+        //return bookRepository.findById(id);
     }
 
     public List<Book> getBooksByCategory(Integer category_id){
@@ -51,22 +57,18 @@ public class BookService {
         return new ArrayList<>(books);
     }
 
-    public List<Book> getBooksByAuthor(Integer author_id){
-        Set<Book> books;
+    public Set<BookAuthors> getBooksByAuthor(Integer author_id){
+        Set<BookAuthors> books;
 
         Optional<Author> authorById = authorRepository.findById(author_id);
         if(!authorById.isPresent()){
             throw new ResourceNotFoundException("Author with id " + author_id + " does not exist.");
         }
 
-        books = authorById.get().getBooks();
-        return new ArrayList<>(books);
+        return authorById.get().getBookAuthors();
     }
 
     public Book createBook(Book book, Integer author_id, Integer category_id){
-        Set<Book> books = new HashSet<>();
-        Author author1 = new Author();
-        Category category1 = new Category();
 
         Optional<Author> authorById = authorRepository.findById(author_id);
         if (!authorById.isPresent()){
@@ -79,17 +81,43 @@ public class BookService {
         }
 
         Author author = authorById.get();
-        book.setAuthor(author);
-
         Category category = categoryById.get();
         book.setCategory(category);
+        Book bookSaved = bookRepository.save(book);
 
-        Book book1 = bookRepository.save(book);
-        books.add(book1);
-        author1.setBooks(books);
-        category1.setBooks(books);
-        return book1;
+        BookAuthors bookAuthors = new BookAuthors(bookSaved, author);
+        BookAuthors bookAuthors1 = bookAuthorsRepository.save(bookAuthors);
+
+        return bookSaved;
     }
+
+//    public Book createBook(Book book, Integer author_id, Integer category_id){
+//        Set<Book> books = new HashSet<>();
+//        Author author1 = new Author();
+//        Category category1 = new Category();
+//
+//        Optional<Author> authorById = authorRepository.findById(author_id);
+//        if (!authorById.isPresent()){
+//            throw new ResourceNotFoundException("Author with id " + author_id + " does not exist.");
+//        }
+//
+//        Optional<Category> categoryById = categoryRepository.findById(category_id);
+//        if (!categoryById.isPresent()){
+//            throw new ResourceNotFoundException("Category with id " + category_id + " does not exist.");
+//        }
+//
+//        Author author = authorById.get();
+//        book.setAuthor(author);
+//
+//        Category category = categoryById.get();
+//        book.setCategory(category);
+//
+//        Book book1 = bookRepository.save(book);
+//        books.add(book1);
+//        author1.setBooks(books);
+//        category1.setBooks(books);
+//        return book1;
+//    }
 
     public Book updateBook(Book book, Integer book_id){
         Optional<Book> bookById = bookRepository.findById(book_id);
@@ -103,7 +131,7 @@ public class BookService {
         bookSave.setSubtitle(book.getSubtitle());
         bookSave.setDescription(book.getDescription());
 
-        bookSave.setAuthor(bookSave.getAuthor());
+        bookSave.setBookAuthors(bookSave.getBookAuthors());
 
         bookSave.setCategory(bookSave.getCategory());
 

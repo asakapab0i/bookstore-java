@@ -6,7 +6,6 @@ import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,9 +16,9 @@ public class Author extends Audit{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "author")
     @JsonIgnore
-    private Set<Book> books = new HashSet<>();
+    Set<BookAuthors> bookAuthors;
 
     @NotBlank(message = "Enter first name")
     @Field
@@ -36,12 +35,12 @@ public class Author extends Audit{
         return id;
     }
 
-    public Set<Book> getBooks() {
-        return books;
+    public Set<BookAuthors> getBookAuthors() {
+        return bookAuthors;
     }
 
-    public void setBooks(Set<Book> books) {
-        this.books = books;
+    public void setBookAuthors(Set<BookAuthors> bookAuthors){
+        this.bookAuthors = bookAuthors;
     }
 
     public String getFirst_name() {
@@ -63,7 +62,6 @@ public class Author extends Audit{
     @Override
     public String toString() {
         return "Author{" +
-                ", books=" + books +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 '}';

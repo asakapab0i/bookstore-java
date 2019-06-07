@@ -6,6 +6,7 @@ import org.hibernate.search.annotations.Indexed;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Indexed
@@ -32,9 +33,8 @@ public class Book extends Audit{
     @Field
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id")
-    private Author author;
+    @OneToMany(mappedBy = "author")
+    private Set<BookAuthors> bookAuthors;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
@@ -52,7 +52,6 @@ public class Book extends Audit{
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
-        this.author = author;
         this.category = category;
     }
 
@@ -88,12 +87,12 @@ public class Book extends Audit{
         this.description = description;
     }
 
-    public Author getAuthor() {
-        return author;
+    public Set<BookAuthors> getBookAuthors() {
+        return bookAuthors;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setBookAuthors(Set<BookAuthors>  bookAuthors){
+        this.bookAuthors = bookAuthors;
     }
 
     public Category getCategory() {
@@ -110,7 +109,6 @@ public class Book extends Audit{
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", author=" + author +
                 ", category=" + category +
                 '}';
     }
