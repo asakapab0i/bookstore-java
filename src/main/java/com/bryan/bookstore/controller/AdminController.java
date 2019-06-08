@@ -15,7 +15,7 @@ import static org.hibernate.search.jpa.Search.getFullTextEntityManager;
 @Transactional
 @RestController
 @RequestMapping(path="admin")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${application.crossorigin.url}")
 public class AdminController {
     @PersistenceContext
     private EntityManager entityManager;

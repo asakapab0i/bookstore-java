@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="author")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "${application.crossorigin.url}")
 public class AuthorController {
 
     @Autowired
